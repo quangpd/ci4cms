@@ -1,0 +1,64 @@
+.tablesortable .rowtop label {
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+}
+.tablesortable .rowtop select,
+.tablesortable .rowtop input {
+  width: auto;
+  display: inline-block;
+}
+.tablesortable .table {
+  clear: both;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+  max-width: none !important;
+}
+.tablesortable .table thead tr:first-child th {
+  background-color: #f8f8f8;
+}
+
+.tablesortable .table thead tr:first-child th.asc,
+.tablesortable .table thead tr:first-child th.desc {
+  background-color: #eee;
+}
+
+.tablesortable .table thead .sorting,
+.tablesortable .table thead .sorting.asc,
+.tablesortable .table thead .sorting.desc {
+  cursor: pointer;
+  position: relative;
+  padding-right: 25px;
+}
+.tablesortable .table thead .sorting:after,
+.tablesortable .table thead .sorting.asc:after,
+.tablesortable .table thead .sorting.desc:after {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: block;
+  font-family: "Glyphicons Halflings";
+  opacity: 0.5;
+}
+.tablesortable .table thead .sorting:after {
+  opacity: 0.2;
+  content: "\f0dc";
+}
+.tablesortable .table thead .sorting.desc:after {
+  content: "\f0dd";
+}
+.tablesortable .table thead .sorting.asc:after {
+  content: "\f0de";
+}
+.tablesortable .info {
+  padding-top: 8px;
+  white-space: nowrap;
+}
+.tablesortable .paging {
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+.tablesortable .paging ul.pagination {
+  margin: 2px 0;
+}
