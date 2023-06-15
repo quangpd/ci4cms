@@ -126,4 +126,66 @@ class User extends BaseController
 
         return redirect()->to($url)->with('message', lang('Auth.successLogout'));
     }
+
+    public function token()
+    {
+        // Validate credentials
+        $rules = setting('Validation.login') ?? [
+            'email' => [
+                'label' => 'Auth.email',
+                'rules' => config('AuthSession')->emailValidationRules,
+            ],
+            'password' => [
+                'label' => 'Auth.password',
+                'rules' => 'required',
+            ]
+        ];
+
+        if (auth()->loggedIn()) {
+            auth()->logout();
+        }
+
+        if (!$this->validateData((array)$this->request->getVar(), $rules)) {
+            return $this->response
+                ->setJSON(['errors' => $this->validator->getErrors()])
+                ->setStatusCode(401);
+        }
+
+        // Get the credentials for login
+        $credentials             = $this->request->getVar(setting('Auth.validFields'));
+        $credentials             = array_filter($credentials);
+        $credentials['password'] = $this->request->getVar('password');
+
+        // Attempt to login
+        $result = auth()->attempt($credentials);
+        if (!$result->isOK()) {
+            return $this->response
+                ->setJSON(['error' => $result->reason()])
+                ->setStatusCode(401);
+        }
+
+        // Generate token and return to client
+        $token = auth()->user()->generateAccessToken($this->getDeviceName());
+
+        return $this->response
+            ->setJSON(['token' => $token->raw_token]);
+    }
+
+    public function getDeviceName()
+    {
+        $agent = $this->request->getUserAgent();
+
+        if ($agent->isBrowser()) {
+            $currentAgent = $agent->getBrowser() . ' ' . $agent->getVersion();
+        } elseif ($agent->isRobot()) {
+            $currentAgent = $agent->getRobot();
+        } elseif ($agent->isMobile()) {
+            $currentAgent = $agent->getMobile();
+        } else {
+            $currentAgent = 'Unidentified User Agent';
+        }
+
+
+        return $agent->getPlatform() . " - " . $currentAgent;
+    }
 }

@@ -6,7 +6,26 @@ use \App\Libraries\Breadcrumb;
 
 class AdminController extends \App\Controllers\BaseController
 {
-    protected $data = [];
+    private $_rules = array(
+        array('field' => 'category_id', 'label' => 'Danh mục', 'rules' => 'trim'),
+        array('field' => 'title', 'label' => 'Tiêu đề', 'rules' => 'trim|required|min_length[3]|max_length[255]'),
+        array('field' => 'description', 'label' => 'Mô tả', 'rules' => 'trim'),
+        array('field' => 'content', 'label' => 'Nội dung', 'rules' => 'trim|required'),
+        array('field' => 'image', 'label' => 'Hình ảnh', 'rules' => 'trim'),
+        array('field' => 'file', 'label' => 'file', 'rules' => 'trim'),
+        array('field' => 'tags', 'label' => 'Tags', 'rules' => 'trim'),
+        array('field' => 'status', 'label' => 'Trạng thái', 'rules' => 'trim'),
+        array('field' => 'author', 'label' => 'Tác giả', 'rules' => 'trim'),
+        array('field' => 'source', 'label' => 'Nguồn', 'rules' => 'trim'),
+        array('field' => 'published_at', 'label' => 'Xuất bản', 'rules' => 'trim'),
+        array('field' => 'meta_keywords', 'label' => 'Meta keywords', 'rules' => 'trim'),
+        array('field' => 'meta_description', 'label' => 'Meta description', 'rules' => 'trim'),
+        array('field' => 'is_featured', 'label' => 'Nổi bật', 'rules' => 'trim'),
+        array('field' => 'is_privated', 'label' => 'Nội bộ', 'rules' => 'trim'),
+        array('field' => 'layout', 'label' => 'layout', 'rules' => 'trim'),
+        array('field' => 'template', 'label' => 'template', 'rules' => 'trim'),
+    );
+
     protected $breadcumbs;
 
     public function __construct()
@@ -47,7 +66,20 @@ class AdminController extends \App\Controllers\BaseController
 
     public function form($id = NULL)
     {
-        # code...
+        if ($this->request->isAJAX()) {
+            $model = new \Blog\Models\ArticleModel();
+            $this->data['item'] = $id ? $model->asObject()->find($id) : $model->getEmptyItem();
+
+            foreach ($this->_rules as $field) {
+                $this->data['item']->{$field['field']} = $this->data['item']->{$field['field']} ?? "";
+            }
+
+            $response['success'] = 1;
+            $response['id'] = $id;
+            $response['html'] = view('\Blog\admin\form', $this->data, ['saveData' => true]);
+
+            return $this->response->setJSON($response);
+        }
     }
 
     public function featured($id = NULL)

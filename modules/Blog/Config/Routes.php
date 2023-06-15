@@ -8,6 +8,8 @@ namespace Blog\Config;
 $routes->group('', ['namespace' => 'Blog\Controllers'], static function ($routes) {
     $routes->get('blog', 'BlogController::index');
 
+    $routes->cli('blog/email', 'BlogController::index');
+
     $routes->add('admin/blog', 'AdminController::index');
     $routes->add('admin/blog/form/(:any)', 'AdminController::form/$1');
     $routes->post('admin/blog/active/(:any)', 'AdminController::active/$1');

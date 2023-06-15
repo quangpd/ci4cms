@@ -37,6 +37,12 @@ $routes->get('login', 'User::loginView');
 $routes->post('login', 'User::loginAction');
 $routes->get('logout', 'User::logoutAction');
 
+$routes->post('auth/token', '\App\Controllers\User::token');
+
+$routes->get('api/users', static function () {
+    return 'Hello World';
+});
+
 $routes->get('admin', 'AdminController::index');
 
 /*

@@ -36,8 +36,5 @@ if (document.all && !window.setInterval.isPolyfill) {
   window.setInterval.isPolyfill = true;
 }
 
-$(function () {
-  var table = $("#table").tablesortable();
-  table.init();
-});
+$(function () {});
 // Path: public/backend/js/demo.js

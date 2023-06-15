@@ -7,7 +7,7 @@ use CodeIgniter\Config\BaseConfig;
 class Email extends BaseConfig
 {
     public string $fromEmail  = 'csdl@thainguyen.edu.vn';
-    public string $fromName   = 'csdl@thainguyen.edu.vn';
+    public string $fromName   = 'CSDL';
     public string $recipients = '';
 
     /**
@@ -43,7 +43,7 @@ class Email extends BaseConfig
     /**
      * SMTP Port
      */
-    public int $SMTPPort = 465;
+    public int $SMTPPort = 587;
 
     /**
      * SMTP Timeout (in seconds)
@@ -58,12 +58,12 @@ class Email extends BaseConfig
     /**
      * SMTP Encryption. Either tls or ssl
      */
-    public string $SMTPCrypto = 'ssl';
+    public string $SMTPCrypto = 'tls';
 
     /**
      * Enable word-wrap
      */
-    public bool $wordWrap = true;
+    public bool $wordWrap = false;
 
     /**
      * Character count to wrap at

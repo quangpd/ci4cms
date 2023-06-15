@@ -273,7 +273,6 @@
             </div><!-- card-header -->
             <div class="card-body p-3 p-xl-4">
                 <div id="vmap" class="ht-200 mb-4"></div>
-
                 <table class="table table-one">
                     <thead>
                         <tr>

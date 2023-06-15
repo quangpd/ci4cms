@@ -5,7 +5,7 @@
             <td><?php echo $item->is_featured ?> | <?php echo $item->is_privated ?></td>
             <td>
                 <div>
-                    <?php echo anchor('article/' . $item->id . '/' . url_title($item->title), $item->title, 'target="_blank" class="active_' . $item->status . '"'); ?>
+                    <?php echo anchor('article/' . $item->id . '/' . url_title($item->title), $item->title, 'target="_blank"'); ?>
                     <?php if ($item->is_featured == 1) : ?><span class="badge bg-danger">Nổi bật</span><?php endif; ?>
                     <?php if ($item->is_privated == 1) : ?><span class="badge bg-secondary">Nội bộ</span><?php endif; ?>
                 </div>
@@ -30,7 +30,7 @@
                     <?php echo anchor('admin/blog/featured/' . $item->id, '<i class="fa fa-star"></i>', 'title="Thay đổi trạng thái" class="btn btn-sm btn-ajax btn-outline-secondary"'); ?>
                     <?php echo anchor('admin/blog/private/' . $item->id, '<i class="fa fa-lock"></i>', 'title="Thay đổi trạng thái" class="btn btn-sm btn-ajax btn-outline-secondary"'); ?>
                     <?php echo anchor('admin/blog/active/' . $item->id, '<i class="fa fa-check"></i>', 'title="Thay đổi trạng thái" class="btn btn-sm btn-ajax btn-outline-secondary"'); ?>
-                    <?php echo anchor('admin/blog/form/' . $item->id, '<i class="fa fa-edit"></i>', 'title="Cập nhật" class="btn btn-sm btn-ajax btn-outline-secondary"'); ?>
+                    <?php echo anchor('admin/blog/form/' . $item->id, '<i class="fa fa-edit"></i>', 'title="Cập nhật" class="btn btn-sm btn-outline-secondary btn-modal"'); ?>
                     <?php echo anchor('admin/blog/delete/' . $item->id, '<i class="fa fa-trash-o"></i>', 'title="Xóa bản ghi!?" class="btn btn-sm btn-ajax btn-confirm btn-outline-secondary"'); ?>
                 </div>
             </td>
